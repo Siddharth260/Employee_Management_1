@@ -1,0 +1,156 @@
+[
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "AddEmployee",
+    "RelativePath": "api/Lead/AddEmployee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "leadModel",
+        "Type": "EmployeeManagement_1.Models.Lead",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "GetAllEmployee",
+    "RelativePath": "api/Lead/GetAllEmployee",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "GetEmployeeByUId",
+    "RelativePath": "api/Lead/GetEmployeeByUId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "GetMyTeamByUId",
+    "RelativePath": "api/Lead/GetMyTeamByUId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "GetTeamTaskSheetByUId",
+    "RelativePath": "api/Lead/GetTeamTaskSheetByUId",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "RemoveEmployeeByUId",
+    "RelativePath": "api/Lead/RemoveEmployeeByUId",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.LeadController",
+    "Method": "UpdateEmployeeByUId",
+    "RelativePath": "api/Lead/UpdateEmployeeByUId",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "leadModel",
+        "Type": "EmployeeManagement_1.Models.Lead",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.MemberController",
+    "Method": "AddTaskSheetByUId",
+    "RelativePath": "api/Member/AddTaskSheetByUId",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "memberModel",
+        "Type": "EmployeeManagement_1.Models.Member",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.MemberController",
+    "Method": "GetTaskSheetUId",
+    "RelativePath": "api/Member/GetTaskSheetUId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagement_1.Controllers.MemberController",
+    "Method": "ResignByUId",
+    "RelativePath": "api/Member/ResignByUId",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
