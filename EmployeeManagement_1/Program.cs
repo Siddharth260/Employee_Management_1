@@ -1,3 +1,4 @@
+using EmployeeManagement_1.Common;
 using EmployeeManagement_1.Cosmos;
 using EmployeeManagement_1.Interface;
 using EmployeeManagement_1.Services;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ICosmosDbService, CosmosDbService>();
 builder.Services.AddSingleton<ILeadService, LeadService>();
 builder.Services.AddSingleton<IMemberService, MemberService>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // Add services to the container.
 builder.Services.AddControllers();

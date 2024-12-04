@@ -1,4 +1,5 @@
-﻿using EmployeeManagement_1.Common;
+﻿using AutoMapper;
+using EmployeeManagement_1.Common;
 using EmployeeManagement_1.Cosmos;
 using EmployeeManagement_1.Entities;
 using EmployeeManagement_1.Interface;
@@ -9,19 +10,17 @@ namespace EmployeeManagement_1.Services
     public class LeadService : ILeadService
     {
         private readonly ICosmosDbService _dbService;
-        public LeadService (ICosmosDbService dbService)
+        private readonly IMapper _mapper;
+        public LeadService(ICosmosDbService dbService, IMapper mapper)
         {
             _dbService = dbService;
+            _mapper = mapper;
         }
 
         public async Task<Lead> AddEmployee(Lead leadModel)
         {
-            var employee = new LeadEntity();
-            employee.Name = leadModel.Name;
-            employee.Designation = leadModel.Designation;
-            employee.Domain = leadModel.Domain;
+            var employee = _mapper.Map<LeadEntity>(leadModel);
             employee.DateOfJoining = DateTime.Today;
-
             if (employee.Designation == "Lead")
             {
                 employee.initialize(true, Credentials.leadDocumentType, Credentials.createdBy, Credentials.createdByName);
@@ -30,37 +29,18 @@ namespace EmployeeManagement_1.Services
             {
                 employee.initialize(true, Credentials.memberDocumentType, Credentials.createdBy, Credentials.createdByName);
             }
-
             var response = await _dbService.AddItemAsync(employee);
-
-            var responseModel = new Lead()
-            {
-                UId = employee.UId,
-                Name = employee.Name,
-                Designation = employee.Designation,
-                Domain = employee.Domain,
-                DateOfJoining = employee.DateOfJoining
-            };
-
+            var responseModel = _mapper.Map<Lead>(response);
             return responseModel;
-            
         }
 
         public async Task<List<Lead>> GetAllEmployee()
         {
             var response = await _dbService.GetAllEmployee();
             var responseList = new List<Lead>();
-            
             foreach (var item in response)
             {
-                var model = new Lead()
-                {
-                    UId = item.UId,
-                    Name = item.Name,
-                    DateOfJoining = item.DateOfJoining,
-                    Designation = item.Designation,
-                    Domain = item.Domain
-                };
+                var model = _mapper.Map<Lead>(item);
                 responseList.Add(model);
             }
             return responseList;
@@ -69,16 +49,10 @@ namespace EmployeeManagement_1.Services
         public async Task<Lead> GetEmployeeByUId(string UId)
         {
             var response = await _dbService.GetEmployeeByUId(UId);
-            var model = new Lead()
-            {
-                UId = response.UId,
-                Name = response.Name,
-                DateOfJoining = response.DateOfJoining,
-                Designation = response.Designation,
-                Domain = response.Domain
-            };
+            var model = _mapper.Map<Lead>(response);
             return model;
         }
+
         public async Task<List<Lead>> GetMyTeamByUId(string UId)
         {
             var lead = await _dbService.GetEmployeeByUId(UId);
@@ -87,14 +61,7 @@ namespace EmployeeManagement_1.Services
 
             foreach (var item in response)
             {
-                var model = new Lead()
-                {
-                    UId = item.UId,
-                    Name = item.Name,
-                    DateOfJoining = item.DateOfJoining,
-                    Designation = item.Designation,
-                    Domain = item.Domain
-                };
+                var model = _mapper.Map<Lead>(item);
                 responseList.Add(model);
             }
             return responseList;
@@ -105,7 +72,6 @@ namespace EmployeeManagement_1.Services
             var existingEmployee = await _dbService.GetEmployeeByUId(leadModel.UId);
             existingEmployee.Active = false;
             existingEmployee.Archived = true;
-            //existingEmployee.dType = leadModel.Designation;
 
             await _dbService.ReplaceAsync(existingEmployee);
 
@@ -124,15 +90,7 @@ namespace EmployeeManagement_1.Services
             existingEmployee.DateOfJoining = DateTime.Today;
 
             var response = await _dbService.AddItemAsync(existingEmployee);
-
-            var responseModel = new Lead()
-            {
-                Name = existingEmployee.Name,
-                UId = existingEmployee.UId,
-                Designation = existingEmployee.Designation,
-                Domain = existingEmployee.Domain,
-                DateOfJoining = existingEmployee.DateOfJoining
-            };
+            var responseModel = _mapper.Map<Lead>(existingEmployee);
             return responseModel;
         }
 
@@ -143,7 +101,6 @@ namespace EmployeeManagement_1.Services
             existingEmployee.Archived = true;
 
             await _dbService.ReplaceAsync(existingEmployee);
-
             return "Employee Removed From The Company";
         }
 
@@ -156,12 +113,7 @@ namespace EmployeeManagement_1.Services
             foreach (var member in teamList)
             {
                 var response = await _dbService.GetTaskSheetByUId(member.UId);
-                var model = new Member()
-                {
-                    UId = response.UId,
-                    Name = response.Name,
-                    Tasksheet = response.Tasksheet
-                };
+                var model = _mapper.Map<Member>(response);
                 taskList.Add(model);
             }
             return taskList;
